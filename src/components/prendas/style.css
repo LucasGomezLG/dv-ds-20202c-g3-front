@@ -1,9 +1,15 @@
-.marginTopLoc{
 
-    margin-top: 80px;
-
+.nav-link{
+    font-family: 'Roboto', sans-serif;
+    color:white;
+    font-size: 20px;
+    line-height: normal;
+    /*display: inline-block;*/
+    float:left;
+    display: flex;
+    text-align: center;
 }
 
-.marginTop {
-    margin-top: 500px;
+.coso{
+    color: red;
 }

@@ -1,7 +1,5 @@
 import React from 'react';
 import API from '../service/api';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -23,7 +21,7 @@ class Productos extends React.Component {
     super(props);
 
     this.state = {
-      productos: [],
+     productos: [],
       productosFiltrados: [],
       stock: '',
       idLocal: '',
@@ -33,6 +31,7 @@ class Productos extends React.Component {
 
   componentDidMount() {
 
+   
     //this.setState({ idLocal: this.props.location.state.idSet })
 
     /*const paramReq = {
@@ -49,34 +48,54 @@ class Productos extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <AppBar positon="static">
-            <Toolbar>
-              <Typography variant="h4" noWrap>
-                Productos
-              </Typography>
-              <LocalGroceryStoreIcon className="ml-2" />
-              <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.handleAdd()} >
+        
+        <div class="row">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-sm bg-dark">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="../Prendas">Prendas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">Clientes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">Ventas</a>
+                </li>
+              </ul>
+            </nav>
+
+            <div class= "text-center" >  
+            <h1>Listado de Clientes</h1>
+            </div>
+      </div>
+  </div>
+
+  <div class='row container'>
+          <div class="col-sm-3"> 
+          <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.handleAdd()} >
                 Agregar
               </Button>
-              <div className="marginBotDrop">
+          </div>
+          <div class="col-sm-4"> 
+          <div className="marginBotDrop">
                 <TextField label="Buscar por nombre" color="secondary" onChange={(e) => this.textBuscador(e)} />
                 <SearchIcon className="searchAlign" />
               </div>
-              <div className="marginBotDrop" >
+          </div>
+          <div class="col-sm-4"> 
+          <div className="marginBotDrop" >
                 {this.dropDown()}
               </div>
-            </Toolbar>
-          </AppBar>
-        </div>
+           
+          </div>
+          </div>
+
+        
         <div className="container marginTopProd">
           {this.renderizarProductos()}
         </div>
-        <div className=" col-2 container marginTopProd">
-          <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.volver()}>
-            Volver
-          </Button>
-        </div>
+   
       </div>
     )
   }

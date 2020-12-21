@@ -1,6 +1,4 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
@@ -18,6 +16,10 @@ import Campera from '../../Img/Campera.jpg';
 import Camisa from '../../Img/Camisa.jpg';
 import Chaqueta from '../../Img/Chaqueta.webp';
 import Tapado from '../../Img/Tapado.jpg';
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import './style.css'
+
 
 class Prendas extends React.Component {
 
@@ -42,32 +44,35 @@ class Prendas extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <AppBar positon="static">
-            <Toolbar>
-            <Typography variant="h6" noWrap>
-            Prendas
-              </Typography>
-              <Typography variant="h6" noWrap>
-            Clientes
-              </Typography>
-              <Typography variant="h6" noWrap>
-            Ventas
-              </Typography>
-            </Toolbar>
-          </AppBar>
-        </div>
-        <div className="marginTop">
-          <Typography variant="h4" noWrap>
-            Prendas
-              </Typography>
-          <div className="ml-5">
-            <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.agregarPrenda()}>
-              Agregar
-              </Button>
+  <div>
+    <div class="row">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-sm bg-dark">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">Prendas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="../clientes/">Clientes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">Ventas</a>
+                </li>
+              </ul>
+            </nav>
+
+            <div class= "text-center" >  
+            <h1>Listado de Prendas</h1>
+            </div>
+      </div>
+  </div>
+  
+        <div class='row container'>
+          <div class="col-sm-6"> 
+          <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.agregarPrenda()}>
+              Agregar</Button>
           </div>
-          <div className="marginBotDrop" >
+               <div class="col-sm-6 text-right" >
             {this.dropDown()}
           </div>
         </div>
@@ -147,18 +152,23 @@ class Prendas extends React.Component {
               <Typography variant="body2" color="textSecondary" component="p">
                 {prenda.descripcion}
               </Typography>
+              <Typography>
+              $ {prenda.precioBase}
+            </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Typography>
-              $ {prenda.precioBase}
-            </Typography>
-          </CardActions>
-          <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.eliminarPrenda(prenda.id)}>
+          <Button  variant="contained" color="secondary" onClick={() => this.eliminarPrenda(prenda.id)}>
             Eliminar
               </Button>
+          </CardActions>
+         
         </Card>
       </div>
+
+
+
+
 
     );
   }
@@ -172,6 +182,7 @@ class Prendas extends React.Component {
   agregarPrenda() {
 
     return (
+      
       Swal.mixin({
         input: 'text',
         confirmButtonText: 'Next &rarr;',
@@ -179,7 +190,7 @@ class Prendas extends React.Component {
         progressSteps: ['1', '2', '3', '4']
       }).queue([
         {
-          title: 'Tipo de prenda',
+          title: 'Tipo de Prenda',
           text: '',
           input: 'radio',
           inputOptions: {
@@ -197,11 +208,11 @@ class Prendas extends React.Component {
           }
         },
         {
-          title: 'Descripcion',
+          title: 'Descripción',
           text: '',
           inputValidator: (text) => {
             if (!text) {
-              return 'Necesitas agregar una descripcion!'
+              return 'Necesitas agregar una descripción!'
             }
           }
         },
@@ -229,7 +240,9 @@ class Prendas extends React.Component {
           })
         }
       })
+    
     )
+    
   }
 
   crearPrendaNuevo(values) {
