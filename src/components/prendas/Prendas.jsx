@@ -5,10 +5,8 @@ import API from '../service/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Swal from 'sweetalert2';
-import './style.css';
 import { Dropdown } from 'react-bootstrap';
 import Saco from '../../Img/Saco.webp';
 import Pantalon from '../../Img/Pantalon.jpg';
@@ -16,8 +14,6 @@ import Campera from '../../Img/Campera.jpg';
 import Camisa from '../../Img/Camisa.jpg';
 import Chaqueta from '../../Img/Chaqueta.webp';
 import Tapado from '../../Img/Tapado.jpg';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
 import './style.css'
 
 
@@ -44,35 +40,34 @@ class Prendas extends React.Component {
   render() {
     return (
       <div>
-        <div class="row">
-          <div class="container-fluid">
-            <nav id="navegador" class="navbar navbar-expand-sm bg-dark">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Prendas</a>
+        <div className="row">
+          <div className="container-fluid">
+            <nav className="navbar navbar-expand-sm bg-dark">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link text-light" href="../prendas">Prendas</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../clientes/">Clientes</a>
+                <li className="nav-item">
+                  <a className="nav-link text-light" href="../clientes">Clientes</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Ventas</a>
+                <li className="nav-item">
+                  <a className="nav-link text-light" href="../ventas">Ventas</a>
                 </li>
               </ul>
             </nav>
 
-            <div class="nov text-center" >
+            <div className="text-center" >
               <h1>Listado de Prendas</h1>
             </div>
           </div>
         </div>
-        <div class='row container'>
-          <div  id='boton' class="col-sm-6">
+        <div className='row container'>
+          <div className="col-sm-6">
             <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.agregarPrenda()}>
               Agregar</Button>
           </div>
-
-          <div id='dropdown'class="col-sm-6" >
-          {this.dropDown()}
+          <div className="col-sm-6 text-right" >
+            {this.dropDown()}
           </div>
 
         </div>
@@ -167,10 +162,6 @@ class Prendas extends React.Component {
           </div>
         </Card>
       </div>
-
-
-
-
 
     );
   }

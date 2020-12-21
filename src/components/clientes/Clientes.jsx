@@ -1,18 +1,14 @@
 import React from 'react';
 import API from '../service/api';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 import Typography from '@material-ui/core/Typography';
-import Swal from 'sweetalert2';
 import TextField from '@material-ui/core/TextField';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import CardActionArea from '@material-ui/core/CardActionArea';
 import SearchIcon from '@material-ui/icons/Search';
-import { Dropdown } from 'react-bootstrap';
+import Customer from '../../Img/customer.png';
+import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
@@ -21,17 +17,19 @@ class Productos extends React.Component {
     super(props);
 
     this.state = {
-     productos: [],
-      productosFiltrados: [],
-      stock: '',
-      idLocal: '',
+      clientes: [],
+      clientesFiltrados: [],
+      idSet: '',
     };
 
   }
 
   componentDidMount() {
 
-   
+
+    API.get('tienda/api/clientes/all').then((res) => this.setState({ clientes: res, clientesFiltrados: res }))
+      .catch((error) => console.log(error));
+
     //this.setState({ idLocal: this.props.location.state.idSet })
 
     /*const paramReq = {
@@ -48,28 +46,28 @@ class Productos extends React.Component {
   render() {
     return (
       <div>
-        
-        <div class="row">
-        <div class="container-fluid">
-          <nav id="navegador" class="navbar navbar-expand-sm bg-dark">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="../Prendas">Prendas</a>
+        <div className="row">
+          <div className="container-fluid">
+            <nav className="navbar navbar-expand-sm bg-dark">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link text-light" href="../prendas">Prendas</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Clientes</a>
+                <li className="nav-item">
+                  <a className="nav-link text-light" href="../clientes">Clientes</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Ventas</a>
+                <li className="nav-item">
+                  <a className="nav-link text-light" href="../ventas">Ventas</a>
                 </li>
               </ul>
             </nav>
 
-            <div class="nov text-center" >  
-            <h1>Listado de Clientes</h1>
+
+            <div className="text-center" >
+              <h1>Listado de Clientes</h1>
             </div>
-      </div>
-  </div>
+          </div>
+        </div>
 
   <div class='row container'>
                 <div  id='boton' class="col-sm-6"> 
@@ -87,58 +85,186 @@ class Productos extends React.Component {
  
         
         <div className="container marginTopProd">
-          {this.renderizarProductos()}
+          {this.renderizarClientes()}
         </div>
-   
+
       </div>
     )
   }
 
-  renderizarProductos() {
-    return (
-      <div className="row">
-        {this.state.productosFiltrados.map((producto) => this.transformarProducto(producto))}
-      </div>
-    )
+  textBuscador(e) {
+    if (e.target.value !== '') {
+      this.setState({ clientesFiltrados: this.state.clientesFiltrados.filter((clientes) => clientes.nombre.toLowerCase().includes(e.target.value.toLowerCase())) });
+    } else {
+      this.setState({ clientesFiltrados: this.state.clientes })
+    }
   }
 
-  transformarProducto(producto) {
 
-    return (
+renderizarClientes() {
+  return (
+    <div className="row">
+      {this.state.clientesFiltrados.map((cliente) => this.transformarClientes(cliente))}
+    </div>
+  )
+}
 
-      <div className="col-sm-5 col-md-5 col-lg-3 mt-2" key={producto.id}>
-        <Card>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="recipe" className={this.avatarBackgroud(producto.cantidad)}>
-                {this.avatar(producto.marca)}
-              </Avatar>
-            }
-            title={producto.marca}
-            subheader={"Cantidad: " + producto.cantidad}
-          />
+transformarClientes(cliente) {
+
+  return (
+
+    <div className="col-sm-5 col-md-5 col-lg-3 mt-2" key={cliente.id}>
+      <Card>
+        <CardActionArea>
+          <img src={Customer} alt="Foto" className="img-thumbnail" />
           <CardContent>
-            <div className="text-center" >
-              <Typography variant="body2" color="textSecondary" component="p">
-                {producto.descripcion}
-              </Typography>
-            </div>
-          </CardContent>
-          <CardActions>
-            <Typography variant="body2" color="textSecondary" component="p">
-              <MonetizationOnIcon></MonetizationOnIcon>
-              {producto.precio}
+            <Typography variant="h5" component="h2">
+              {cliente.nombre}
             </Typography>
-            <Button color="secondary" onClick={() => { this.eliminarProd(producto.id) }}>
-              Eliminar
-            </Button>
-          </CardActions>
-        </Card>
-      </div>
-    )
+            <Typography variant="body2" color="textSecondary" component="p">
+              {cliente.apellido}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <div className="row marginBottom">
+          <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.eliminarCliente(cliente.id)}>
+            Eliminar
+              </Button>
+          <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.editCliente(cliente.id, cliente.nombre, cliente.apellido)}>
+            Edit
+              </Button>
+        </div>
+      </Card>
+    </div>
+  )
 
+}
+
+handleAdd(){
+  return (
+
+    Swal.mixin({
+      input: 'text',
+      confirmButtonText: 'Next &rarr;',
+      showCancelButton: true,
+      width: 800,
+      progressSteps: ['1', '2', '3']
+    }).queue([
+      {
+        title: 'Nombre',
+        text: '',
+        inputValidator: (text) => {
+          if (!text) {
+            return 'Necesitas agregar un nombre!'
+          }
+        }
+      },
+      {
+        title: 'Apellido',
+        text: '',
+        inputValidator: (text) => {
+          if (!text) {
+            return 'Necesitas agregar apellido!'
+          }
+        }
+      }
+    ]).then((result) => {
+      if (result.value) {
+
+        this.crearNuevoCliente(result.value);
+
+        Swal.fire({
+          title: 'Prenda lista!',
+          html: ` Nombre: ${result.value[0]}<br />
+                Apellido: ${result.value[1]}<br />         
+                `,
+          confirmButtonText: 'Listo!'
+        })
+      }
+    })
+
+  )
+}
+
+eliminarCliente(id) {
+  API.postDos('tienda/api/cliente/delete/' + id)
+    .then(() => this.componentDidMount())
+    .catch((error) => console.log(error))
+}
+
+crearNuevoCliente(values) {
+
+  const body = {
+    nombre: values[0],
+    apellido: values[1],
   }
 
+  API.post('tienda/api/cliente/new', body)
+    .then(() => this.componentDidMount())
+    .catch((error) => console.log(error))
+
+}
+
+editCliente(id, nombre, apellido){
+
+  this.setState({
+    idSet: id
+  })
+
+  return (
+    Swal.mixin({
+      input: 'text',
+      confirmButtonText: 'Next &rarr;',
+      showCancelButton: true,
+      progressSteps: ['1', '2', '3']
+    }).queue([
+      {
+        title: 'Editar nombre:',
+        text: `${nombre}`,
+        inputValidator: (text) => {
+          if (!text) {
+            return 'Necesitas agregar un nombre!'
+          }
+        }
+      },
+      {
+        title: 'Editar apellido:',
+        text: `${apellido}`,
+        inputValidator: (text) => {
+          if (!text) {
+            return 'Necesitas agregar un apellido!'
+          }
+        }
+      }
+    ]).then((result) => {
+      if (result.value) {
+
+        this.updateCliente(result.value);
+
+        Swal.fire({
+          title: 'Cliente editado!',
+          html: ` Nombre: ${result.value[0]}<br />
+                apellido: ${result.value[1]}<br />              
+                `,
+          confirmButtonText: 'Listo!'
+        })
+      }
+    })
+  )
+}
+
+updateCliente(values){
+  const body = {
+    nombre: values[0],
+    apellido: values[1]
+  }
+
+  API.put('tienda/api/cliente/update/' + this.state.idSet, body)
+    .then(() => this.componentDidMount())
+    .catch((error) => console.log(error))
+}
+
+/*
   handleAdd() {
     return (
 
@@ -267,44 +393,7 @@ class Productos extends React.Component {
       )
     }
   }
-
-  dropDown() {
-
-    return (
-
-      <Dropdown>
-        <Dropdown.Toggle>
-          Filtrar strock
-      </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item onClick={() => this.todos()}>Todos</Dropdown.Item>
-          <Dropdown.Item onClick={() => this.sinStock()}>Sin stock</Dropdown.Item>
-          <Dropdown.Item onClick={() => this.baja()}>Baja</Dropdown.Item>
-          <Dropdown.Item onClick={() => this.media()}>Media</Dropdown.Item>
-          <Dropdown.Item onClick={() => this.alta()}>Alta</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-
-    )
-
-  }
-
-  todos() {
-    this.setState({ productosFiltrados: this.state.productos });
-  }
-  sinStock() {
-    this.setState({ productosFiltrados: this.state.productos.filter((producto) => producto.cantidad === 0) });
-  }
-  baja() {
-    this.setState({ productosFiltrados: this.state.productos.filter((producto) => producto.cantidad <= 10 && producto.cantidad > 0) });
-  }
-  media() {
-    this.setState({ productosFiltrados: this.state.productos.filter((producto) => producto.cantidad > 10 && producto.cantidad <= 50) });
-  }
-  alta() {
-    this.setState({ productosFiltrados: this.state.productos.filter((producto) => producto.cantidad > 50) });
-  }
-
+/*
   textBuscador(e) {
 
     if (e.target.value !== '') {
@@ -324,7 +413,7 @@ class Productos extends React.Component {
 
   }
 
-
+*/
 }
 
 export default Productos;
