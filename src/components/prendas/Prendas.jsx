@@ -1,7 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import API from '../service/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from '@material-ui/core/Card';
@@ -9,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Swal from 'sweetalert2';
+import './style.css';
 import { Dropdown } from 'react-bootstrap';
 import Saco from '../../Img/Saco.webp';
 import Pantalon from '../../Img/Pantalon.jpg';
@@ -41,13 +41,12 @@ class Prendas extends React.Component {
 
   }
 
-
   render() {
     return (
-  <div>
-    <div class="row">
-        <div class="container-fluid">
-          <nav class="navbar navbar-expand-sm bg-dark">
+      <div>
+        <div class="row">
+          <div class="container-fluid">
+            <nav class="navbar navbar-expand-sm bg-dark">
               <ul class="navbar-nav">
                 <li class="nav-item">
                   <a class="nav-link text-light" href="#">Prendas</a>
@@ -61,22 +60,21 @@ class Prendas extends React.Component {
               </ul>
             </nav>
 
-            <div class= "text-center" >  
-            <h1>Listado de Prendas</h1>
+            <div class="text-center" >
+              <h1>Listado de Prendas</h1>
             </div>
-      </div>
-  </div>
-  
+          </div>
+        </div>
         <div class='row container'>
-          <div class="col-sm-6"> 
-          <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.agregarPrenda()}>
+          <div class="col-sm-6">
+            <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.agregarPrenda()}>
               Agregar</Button>
           </div>
-               <div class="col-sm-6 text-right" >
+          <div class="col-sm-6 text-right" >
             {this.dropDown()}
           </div>
         </div>
-        <div className=" container marginTopProd">
+        <div className="container">
           {this.renderizarPrendas()}
         </div>
       </div>
@@ -153,16 +151,18 @@ class Prendas extends React.Component {
                 {prenda.descripcion}
               </Typography>
               <Typography>
-              $ {prenda.precioBase}
-            </Typography>
+                $ {prenda.precioBase}
+              </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
-          <Button  variant="contained" color="secondary" onClick={() => this.eliminarPrenda(prenda.id)}>
-            Eliminar
+          <div className="row marginBottom">
+            <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.eliminarPrenda(prenda.id)}>
+              Eliminar
               </Button>
-          </CardActions>
-         
+            <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.editPrenda(prenda.id)}>
+              Edit
+              </Button>
+          </div>
         </Card>
       </div>
 
@@ -179,14 +179,105 @@ class Prendas extends React.Component {
       .catch((error) => console.log(error))
   }
 
-  agregarPrenda() {
+  editPrenda(id) {
+
+    this.setState({
+      idSet: id
+    })
+
+    setTimeout(() => {
+      this.edit(this.state);
+    }, 150);
+
+  }
+
+  edit(state) {
 
     return (
-      
       Swal.mixin({
         input: 'text',
         confirmButtonText: 'Next &rarr;',
         showCancelButton: true,
+        width: 800,
+        progressSteps: ['1', '2', '3', '4']
+      }).queue([
+        {
+          title: 'Tipo de prenda',
+          text: '',
+          input: 'radio',
+          inputOptions: {
+            'CAMISA': 'CAMISA',
+            'SACO': 'SACO',
+            'PANTALON': 'PANTALON',
+            'CAMPERA': 'CAMPERA',
+            'TAPADO': 'TAPADO',
+            'CHAQUETA': 'CHAQUETA',
+          },
+          inputValidator: (input) => {
+            if (!input) {
+              return 'Necesitas elegir una categoria!'
+            }
+          }
+        },
+        {
+          title: 'Descripcion',
+          text: '',
+          inputValidator: (text) => {
+            if (!text) {
+              return 'Necesitas agregar una descripcion!'
+            }
+          }
+        },
+        {
+          title: 'Precio',
+          text: '',
+          inputValidator: (text) => {
+            if (!text) {
+              return 'Necesitas agregar un precio!'
+            }
+          }
+        }
+      ]).then((result) => {
+        if (result.value) {
+
+          this.updatePrenda(result.value);
+
+          Swal.fire({
+            title: 'Prenda lista!',
+            html: ` Tipo: ${result.value[0]}<br />
+                Descripcion: ${result.value[1]}<br />
+                Precio: ${result.value[2]} <br />                  
+                `,
+            confirmButtonText: 'Listo!'
+          })
+        }
+      })
+    )
+
+  }
+
+  updatePrenda(values) {
+    const body = {
+      precioBase: values[2],
+      tipo: values[0],
+      descripcion: values[1],
+    }
+
+    API.put('tienda/api/prendas/edit/' + this.state.idSet, body)
+      .then(() => this.componentDidMount())
+      .catch((error) => console.log(error))
+
+  }
+
+  agregarPrenda() {
+
+    return (
+
+      Swal.mixin({
+        input: 'text',
+        confirmButtonText: 'Next &rarr;',
+        showCancelButton: true,
+        width: 800,
         progressSteps: ['1', '2', '3', '4']
       }).queue([
         {
@@ -240,9 +331,9 @@ class Prendas extends React.Component {
           })
         }
       })
-    
+
     )
-    
+
   }
 
   crearPrendaNuevo(values) {

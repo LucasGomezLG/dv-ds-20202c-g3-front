@@ -13,3 +13,16 @@
 .coso{
     color: red;
 }
+
+.marginTop {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.marginRight{
+    margin-right: auto;
+}
+
+.marginBottom{
+    margin-bottom: 20px;
+}
