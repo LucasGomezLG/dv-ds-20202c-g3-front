@@ -78,3 +78,21 @@ body {
 .texto{
     color:white;
 }
+
+#eliminar{
+    margin-left: -20px;
+ }
+
+ #clientes{
+     margin-top:20px;
+ }
+
+ #buscador{
+     color:white;
+     background-color:whitesmoke;
+     opacity:0.5;
+ }
+
+ .lupa{
+     color:black;
+ }

@@ -10,13 +10,16 @@ class CrearVenta extends React.Component {
         super(props);
 
         this.state = {
+            prendas: []
         }
     }
 
-    componentDidMount(){
-        API.get('tienda/api/ventas/all').then((res) => console.log(res))
-      .catch((error) => console.log(error));
-    }
+    componentDidMount() {
+
+        API.get('tienda/api/prendas/all').then((res) => this.setState({ prendas: res}))
+          .catch((error) => console.log(error));
+    
+      }
 
     render() {
         return (
@@ -86,17 +89,44 @@ class CrearVenta extends React.Component {
             onChange={this.handleInputChange} />
 
         </label>
-
-
-
-
-
+        {this.renderList(this.state.prendas)}
             </form>
+
         </div>
     </div>
  </div>
         )
     }
+    renderList(prendas) {
+        return (
+            <div>
+                <table className="table container backList">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Prenda</th>
+                            <th scope="col">Precio Base</th>                      
+                        </tr>
+                    </thead>
+                    {prendas.map((prenda) => this.transformarItem(prenda))}
+                </table>
+            </div>
+        )
+    }
+
+    transformarItem(prenda) {
+        console.log(prenda)
+        return (
+            <tbody key={prenda.id}>
+                <tr>
+                    <th scope="row">{prenda.id}</th>
+                    <td>{prenda.descripcion}</td>
+                    <td>{prenda.precioBase}</td>
+                </tr>
+            </tbody>
+        )
+    }
+
 }
 
 export default CrearVenta;

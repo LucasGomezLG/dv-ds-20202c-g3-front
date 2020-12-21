@@ -41,7 +41,7 @@ class Ventas extends React.Component {
                         <div className="text-center nov" >
                             <h1>Listado de Ventas</h1>
                         </div>
-                        {this.renderList()}
+                        
                     </div>
                 </div>
                 <div  id='boton' className="col-sm-6 bloque"> 
@@ -49,8 +49,11 @@ class Ventas extends React.Component {
                     Comprar
                     </Button>
                 </div>
-              
+                <div className="bloque">
+               {this.renderList()}
+               </div>
             </div>
+               
         )
     }
     handleRoute(){

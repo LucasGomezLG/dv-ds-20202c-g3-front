@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
-class Productos extends React.Component {
+class Clientes extends React.Component {
   constructor(props) {
     super(props);
 
@@ -76,15 +76,18 @@ class Productos extends React.Component {
                     </Button>
                 </div>
                 <div class="col-sm-6"> 
-                  <div id='search' className="marginBotDrop">
-                    <TextField label="Buscar por nombre" color="Primary" onChange={(e) => this.textBuscador(e)} />
-                    <SearchIcon className="searchAlign" />
+                  <div id='search' className="marginBotDrop"  >
+                    <div id='buscador'>
+                    <TextField label="Buscar por nombre" color="primary" onChange={(e) => this.textBuscador(e)} />
+                    <SearchIcon className="searchAlign lupa" />
+                    </div>
                   </div>
+
                 </div>       
         </div>
  
         
-        <div className="container marginTopProd">
+        <div id="clientes" className="container marginTopProd">
           {this.renderizarClientes()}
         </div>
 
@@ -127,12 +130,16 @@ transformarClientes(cliente) {
           </CardContent>
         </CardActionArea>
         <div className="row marginBottom">
+          <div id="eliminar">
           <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.eliminarCliente(cliente.id)}>
             Eliminar
               </Button>
+              </div>
+              <div>
           <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.editCliente(cliente.id, cliente.nombre, cliente.apellido)}>
-            Edit
+            Editar
               </Button>
+              </div>
         </div>
       </Card>
     </div>
@@ -174,7 +181,7 @@ handleAdd(){
         this.crearNuevoCliente(result.value);
 
         Swal.fire({
-          title: 'Prenda lista!',
+          title: 'Cliente Creado!',
           html: ` Nombre: ${result.value[0]}<br />
                 Apellido: ${result.value[1]}<br />         
                 `,
@@ -416,4 +423,4 @@ updateCliente(values){
 */
 }
 
-export default Productos;
+export default Clientes;

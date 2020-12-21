@@ -153,12 +153,16 @@ class Prendas extends React.Component {
             </CardContent>
           </CardActionArea>
           <div className="row marginBottom">
-            <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.eliminarPrenda(prenda.id)}>
+            <div id="eliminar">
+            <Button  variant="contained" color="secondary" className="ml-5" onClick={() => this.eliminarPrenda(prenda.id)}>
               Eliminar
               </Button>
-            <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.editPrenda(prenda.id)}>
-              Edit
+              </div>
+              <div>
+            <Button  variant="contained" color="secondary" className="ml-5" onClick={() => this.editPrenda(prenda.id)}>
+              Editar
               </Button>
+              </div>
           </div>
         </Card>
       </div>
