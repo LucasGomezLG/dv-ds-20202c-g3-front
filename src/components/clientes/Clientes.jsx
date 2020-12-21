@@ -48,7 +48,7 @@ class Productos extends React.Component {
       <div>
         <div className="row">
           <div className="container-fluid">
-            <nav className="navbar navbar-expand-sm bg-dark">
+            <nav id="navegador" className="navbar navbar-expand-sm bg-dark">
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <a className="nav-link text-light" href="../prendas">Prendas</a>
@@ -63,21 +63,21 @@ class Productos extends React.Component {
             </nav>
 
 
-            <div className="text-center" >
+            <div className="text-center nov" >
               <h1>Listado de Clientes</h1>
             </div>
           </div>
         </div>
 
-  <div class='row container'>
+  <div class='row container bloque'>
                 <div  id='boton' class="col-sm-6"> 
-                <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.handleAdd()} >
+                <Button variant="contained" color="primary" className="ml-5" onClick={() => this.handleAdd()} >
                       Agregar
                     </Button>
                 </div>
                 <div class="col-sm-6"> 
                   <div id='search' className="marginBotDrop">
-                    <TextField label="Buscar por nombre" color="secondary" onChange={(e) => this.textBuscador(e)} />
+                    <TextField label="Buscar por nombre" color="Primary" onChange={(e) => this.textBuscador(e)} />
                     <SearchIcon className="searchAlign" />
                   </div>
                 </div>       

@@ -1,0 +1,32 @@
+#form{
+    text-align: center;
+   
+}
+label{
+font-family: 'Roboto', sans-serif;
+color:white;
+}
+
+.formulario{
+    color:white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.cuadro1{
+    margin-left: 48px;
+}
+
+.cuadro2{
+    margin-left: 82px;
+}
+
+.cuadro3{
+    margin-left: 20px;
+    width: 50px;
+}
+
+.bloque{
+    margin-top:25px;
+}

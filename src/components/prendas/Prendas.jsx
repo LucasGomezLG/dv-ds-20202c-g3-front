@@ -42,7 +42,7 @@ class Prendas extends React.Component {
       <div>
         <div className="row">
           <div className="container-fluid">
-            <nav className="navbar navbar-expand-sm bg-dark">
+            <nav id="navegador" className="navbar navbar-expand-sm bg-dark">
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <a className="nav-link text-light" href="../prendas">Prendas</a>
@@ -56,17 +56,17 @@ class Prendas extends React.Component {
               </ul>
             </nav>
 
-            <div className="text-center" >
+            <div className="text-center nov" >
               <h1>Listado de Prendas</h1>
             </div>
           </div>
         </div>
-        <div className='row container'>
-          <div className="col-sm-6">
-            <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.agregarPrenda()}>
+        <div className='row container bloque'>
+          <div id="boton" className="col-sm-6">
+            <Button variant="contained" color="primary" className="ml-5" onClick={() => this.agregarPrenda()}>
               Agregar</Button>
           </div>
-          <div className="col-sm-6 text-right" >
+          <div id="dropdown" className="col-sm-6 text-right" >
             {this.dropDown()}
           </div>
 

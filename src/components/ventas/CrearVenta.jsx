@@ -4,7 +4,7 @@ import './style.css';
 import Button from '@material-ui/core/Button';
 
 
-class Ventas extends React.Component {
+class CrearVenta extends React.Component {
 
     constructor(props) {
         super(props);
@@ -38,26 +38,65 @@ class Ventas extends React.Component {
                         </nav>
 
                         <div className="text-center nov" >
-                            <h1>Listado de Ventas</h1>
+                            <h1>Comprar</h1>
                         </div>
                     </div>
                 </div>
-                <div  id='boton' className="col-sm-6 bloque"> 
-                    <Button variant="contained" color="primary" className="ml-5" onClick={() => this.handleRoute()} >
-                    Comprar
-                    </Button>
-                </div>
-              
+             {this.formulario()}
+
             </div>
         )
     }
-    handleRoute(){
-       this.props.history.push({
-           pathname:'/crearventas'
-       })
-    }
+
+    formulario(){
+        return (
+<div>
+    <div className="container">
+        <div className="row">
+            <form className='formulario'>
+
+            <label>
+                Nombre Cliente
+                    <input className="cuadro1" type="text" value={this.state.value} onChange={this.handleChange} />
+            </label>
         
+    <Button variant="contained" color="primary" className="ml-5" >
+             Buscar Cliente
+        </Button>
+
+        <br></br>
+
+            <label>
+          Tipo Venta
+          <select className="cuadro2" value={this.state.value} onChange={this.handleChange}>
+            <option value="efectivo">Efectivo</option>
+            <option value="tarjeta">Tarjeta</option>
+          </select>
+        </label>
+
+        <br></br>
+
+            <label>
+          Cantidad de Cuotas
+          <input
+            className="cuadro3"
+            name="cantCuotas"
+            type="number"
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange} />
+
+        </label>
+
+
+
+
+
+            </form>
+        </div>
+    </div>
+ </div>
+        )
     }
+}
 
-
-export default Ventas;
+export default CrearVenta;
