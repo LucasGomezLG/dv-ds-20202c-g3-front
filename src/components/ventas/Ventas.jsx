@@ -83,7 +83,6 @@ class Ventas extends React.Component {
     }
 
     transformarVentas(venta) {
-        console.log(venta)
         return (
             <tbody key={venta.id}>
                 <tr>

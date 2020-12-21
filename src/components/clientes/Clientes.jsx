@@ -69,8 +69,8 @@ class Clientes extends React.Component {
           </div>
         </div>
 
-  <div class='row container bloque'>
-                <div  id='boton' class="col-sm-6"> 
+  <div className='row container bloque'>
+                <div  id='boton' className="col-sm-6"> 
                 <Button variant="contained" color="primary" className="ml-5" onClick={() => this.handleAdd()} >
                       Agregar
                     </Button>
