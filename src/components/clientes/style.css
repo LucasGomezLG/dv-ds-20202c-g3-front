@@ -17,8 +17,10 @@
 }
 
 body {
-
-    background-color: #768fff;
+    background-image: url('../../Img/fondo.jpg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
 }
 
@@ -32,4 +34,39 @@ body {
 
     margin-top: 10%;
 
+}
+
+#navegador ul li a{
+    font-family: 'Roboto', sans-serif;
+    color:white;
+    font-size: 20px;
+    line-height: normal;
+    /*display: inline-block;*/
+    float:left;
+    display: flex;
+    text-align: center;
+}
+#navegador ul a:hover{
+    /*background-color:firebrick;*/
+    background-color:teal;
+    color:white;
+           
+}
+#navegador ul li {
+    display: inline-block;
+
+}
+
+.nov{
+    font-family: 'Roboto', sans-serif;
+   /* color:whitesmoke;*/
+   color: black;
+}
+
+#boton{
+    padding-left: 180px;
+}
+
+#search{
+    padding-left: 300px;
 }

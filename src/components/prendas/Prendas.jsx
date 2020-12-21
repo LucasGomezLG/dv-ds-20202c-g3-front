@@ -46,33 +46,35 @@ class Prendas extends React.Component {
       <div>
         <div class="row">
           <div class="container-fluid">
-            <nav class="navbar navbar-expand-sm bg-dark">
+            <nav id="navegador" class="navbar navbar-expand-sm bg-dark">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link text-light" href="#">Prendas</a>
+                  <a class="nav-link" href="#">Prendas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light" href="../clientes/">Clientes</a>
+                  <a class="nav-link" href="../clientes/">Clientes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light" href="#">Ventas</a>
+                  <a class="nav-link" href="#">Ventas</a>
                 </li>
               </ul>
             </nav>
 
-            <div class="text-center" >
+            <div class="nov text-center" >
               <h1>Listado de Prendas</h1>
             </div>
           </div>
         </div>
         <div class='row container'>
-          <div class="col-sm-6">
+          <div  id='boton' class="col-sm-6">
             <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.agregarPrenda()}>
               Agregar</Button>
           </div>
-          <div class="col-sm-6 text-right" >
-            {this.dropDown()}
+
+          <div id='dropdown'class="col-sm-6" >
+          {this.dropDown()}
           </div>
+
         </div>
         <div className="container">
           {this.renderizarPrendas()}

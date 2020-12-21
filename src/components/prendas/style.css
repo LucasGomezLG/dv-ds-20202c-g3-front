@@ -1,5 +1,5 @@
 
-.nav-link{
+#navegador ul li a{
     font-family: 'Roboto', sans-serif;
     color:white;
     font-size: 20px;
@@ -8,10 +8,17 @@
     float:left;
     display: flex;
     text-align: center;
+   
 }
+#navegador ul a:hover{
+   /* background-color:firebrick;*/
+   background-color:teal;
+    color:white;
+           
+}
+#navegador ul li {
+    display: inline-block;
 
-.coso{
-    color: red;
 }
 
 .marginTop {
@@ -25,4 +32,19 @@
 
 .marginBottom{
     margin-bottom: 20px;
+}
+
+.nov{
+    font-family: 'Roboto', sans-serif;
+   /* color:whitesmoke;*/
+   color: black;
+}
+
+#dropdown{
+    padding-left: 500px;
+   
+}
+
+#boton{
+    padding-left: 180px;
 }

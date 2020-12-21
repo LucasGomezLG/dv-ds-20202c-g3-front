@@ -51,46 +51,40 @@ class Productos extends React.Component {
         
         <div class="row">
         <div class="container-fluid">
-          <nav class="navbar navbar-expand-sm bg-dark">
+          <nav id="navegador" class="navbar navbar-expand-sm bg-dark">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link text-light" href="../Prendas">Prendas</a>
+                  <a class="nav-link" href="../Prendas">Prendas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light" href="#">Clientes</a>
+                  <a class="nav-link" href="#">Clientes</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light" href="#">Ventas</a>
+                  <a class="nav-link" href="#">Ventas</a>
                 </li>
               </ul>
             </nav>
 
-            <div class= "text-center" >  
+            <div class="nov text-center" >  
             <h1>Listado de Clientes</h1>
             </div>
       </div>
   </div>
 
   <div class='row container'>
-          <div class="col-sm-3"> 
-          <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.handleAdd()} >
-                Agregar
-              </Button>
-          </div>
-          <div class="col-sm-4"> 
-          <div className="marginBotDrop">
-                <TextField label="Buscar por nombre" color="secondary" onChange={(e) => this.textBuscador(e)} />
-                <SearchIcon className="searchAlign" />
-              </div>
-          </div>
-          <div class="col-sm-4"> 
-          <div className="marginBotDrop" >
-                {this.dropDown()}
-              </div>
-           
-          </div>
-          </div>
-
+                <div  id='boton' class="col-sm-6"> 
+                <Button variant="contained" color="secondary" className="ml-5" onClick={() => this.handleAdd()} >
+                      Agregar
+                    </Button>
+                </div>
+                <div class="col-sm-6"> 
+                  <div id='search' className="marginBotDrop">
+                    <TextField label="Buscar por nombre" color="secondary" onChange={(e) => this.textBuscador(e)} />
+                    <SearchIcon className="searchAlign" />
+                  </div>
+                </div>       
+        </div>
+ 
         
         <div className="container marginTopProd">
           {this.renderizarProductos()}
